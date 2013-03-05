@@ -69,10 +69,10 @@ return array(
 
 		'mysql' => array(
 			'driver'   => 'mysql',
-			'host'     => '127.0.0.1',
-			'database' => 'database',
+			'host'     => 'localhost',
+			'database' => 'jualbeli2',
 			'username' => 'root',
-			'password' => '',
+			'password' => 'password',
 			'charset'  => 'utf8',
 			'prefix'   => '',
 		),

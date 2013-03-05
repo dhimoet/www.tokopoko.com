@@ -171,3 +171,12 @@ if ( ! Request::cli() and Config::get('session.driver') !== '')
 {
 	Session::load();
 }
+
+/*
+|--------------------------------------------------------------------------
+| Include custom_functions.php
+|--------------------------------------------------------------------------
+*/
+require_once path('app').'libraries/custom_functions.php';
+
+

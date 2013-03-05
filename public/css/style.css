@@ -1,0 +1,20 @@
+#posts_container {
+	display: none;
+}
+
+.post {
+	margin: 0px auto 20px auto;
+}
+
+.post .image {
+	display: block;
+	width: 720px;
+	height: 200px;
+	margin: auto;
+	overflow: hidden;
+}
+
+.post .image img {
+	width: 720px;
+	margin-top: -90px;
+}
