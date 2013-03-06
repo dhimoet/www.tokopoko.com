@@ -39,7 +39,7 @@ class Account_Controller extends Base_Controller {
 				'data'	=> array(
 					'status' => Session::get('facebook_login'),
 					'username' => Session::get('facebook_name'),
-					'page' => $user_facebook->page_name,
+					'page' => isset($user_facebook->page_name)? $user_facebook->page_name : null,
 				)
 			)
 		);

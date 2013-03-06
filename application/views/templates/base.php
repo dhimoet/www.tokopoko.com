@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title><?=$title?> - JualBeli</title>
+	<title><?=$title?> - TokoPoko</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="/js/underscore-min.js"></script>
@@ -14,7 +14,7 @@
 	<div class="navbar">
 		<div class="navbar-inner">
 			<div class="container">
-				<a href="/" class="brand">JualBeli</a>
+				<a href="/" class="brand">TokoPoko <small>BETA</small></a>
 				<ul class="nav">
 					<?if(!Auth::check()) {?>
 					<li><a href="/auth/register">Sign Up</a></li>

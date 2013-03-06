@@ -37,7 +37,7 @@ class FacebookHelper
 			// store login status in session
 			Session::put('facebook_login', true);
 			Session::put('facebook_token', $this->facebook->getAccessToken());
-			Session::put('facebook_name', $me['name']);
+			Session::put('facebook_name', isset($me['name'])? $me['name'] : null);
 			return '/account/facebook';
 		}
 	}
