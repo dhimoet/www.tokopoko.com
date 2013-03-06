@@ -1,20 +1,11 @@
-#posts_container {
-	display: none;
-}
-
-.post {
-	margin: 0px auto 20px auto;
-}
-
-.post .image {
+.image_container {
+	width: 400px;
+	height: 400px;
 	display: block;
-	width: 720px;
-	height: 200px;
-	margin: auto;
 	overflow: hidden;
 }
 
-.post .image img {
-	width: 720px;
-	margin-top: -90px;
+.image_container img {
+	height: 400px;
+	max-width: none;
 }

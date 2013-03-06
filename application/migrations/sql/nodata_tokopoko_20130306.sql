@@ -96,13 +96,16 @@ CREATE TABLE `user_posts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `object_id` bigint(20) unsigned NOT NULL,
   `owner_id` bigint(10) unsigned NOT NULL,
+  `owner_name` varchar(50) DEFAULT NULL,
+  `image_name` varchar(150) DEFAULT NULL,
   `image_url` varchar(255) NOT NULL,
   `page_url` varchar(255) NOT NULL,
+  `location` varchar(50) DEFAULT NULL,
   `object_updated_time` datetime NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,4 +140,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-03-04 23:54:54
+-- Dump completed on 2013-03-06  1:21:01

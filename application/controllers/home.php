@@ -8,7 +8,7 @@ class Home_Controller extends Base_Controller {
 			'title'	=> 'Home',
 			'body'	=> 'home.index',
 			'data' 	=> array(
-				'posts' => UserPost::order_by('object_updated_time', 'desc')->take(20)->get()
+				'posts' => UserPost::order_by('object_updated_time', 'desc')->take(10)->get()
 			)
 		);
 		return View::make('templates.base', $template);
@@ -16,10 +16,14 @@ class Home_Controller extends Base_Controller {
 	
 	public function action_ajax_get_posts()
 	{
-		// get all posts from facebook users
-		$fh = new FacebookHelper;
-		$fh->fetch_posts();
-		$user_posts = UserPost::order_by('object_updated_time', 'desc')->take(20)->get();
+		// check if cached
+		if(!Cache::get('user_posts')) {
+			// get all posts from facebook users
+			$fh = new FacebookHelper;
+			$fh->fetch_posts();
+			Cache::put('user_posts', 'hold', 10);
+		}
+		$user_posts = UserPost::order_by('object_updated_time', 'desc')->take(10)->get();
 		echo json_encode($user_posts);
 		die;
 	}

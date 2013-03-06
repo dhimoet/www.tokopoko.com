@@ -6,7 +6,7 @@
 		<input type="submit" class="btn btn-primary btn-large" value="Login Now" />
 	</form>
 <?} else {?>
-	<p>You are currently logged in on Facebook as <strong><?=$user['name']?></strong>.</p>
+	<p>You are currently logged in on Facebook as <strong><?=$username?></strong>.</p>
 		
 	<p>You can include your Facebook page posts by entering the page name below.</p>
 	<?if(empty($page)) {?>

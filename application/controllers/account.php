@@ -38,7 +38,7 @@ class Account_Controller extends Base_Controller {
 				'body'	=> 'account.facebook',
 				'data'	=> array(
 					'status' => Session::get('facebook_login'),
-					'user' => Session::get('facebook_user_data'),
+					'username' => Session::get('facebook_name'),
 					'page' => $user_facebook->page_name,
 				)
 			)
