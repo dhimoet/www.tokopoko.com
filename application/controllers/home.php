@@ -35,7 +35,7 @@ class Home_Controller extends Base_Controller {
 			$fh = new FacebookHelper;
 			$fh->fetch_posts();
 			$user_posts = UserPost::with('user')->order_by('object_updated_time', 'desc')->take(10)->get();
-			Cache::put('user_posts', json_encode($user_posts), 15);
+			Cache::put('user_posts', json_encode($user_posts), Config::get('shortcuts.cache_duration'));
 			echo json_encode($user_posts);
 		}
 		else {

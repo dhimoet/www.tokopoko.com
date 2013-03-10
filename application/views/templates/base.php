@@ -33,15 +33,15 @@
 		<div class="row">
 			<div class="alert span5">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				<?=Session::get('error')?>
+				<strong>Error!</strong> <?=Session::get('error')?>
 			</div>
 		</div>
 		<?}?>
-		<?if(Session::get('message')) {?>
+		<?if(Session::get('info')) {?>
 		<div class="row">
 			<div class="alert alert-info span5">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				<?=Session::get('message')?>
+				<strong>Info!</strong> <?=Session::get('info')?>
 			</div>
 		</div>
 		<?}?>

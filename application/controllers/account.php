@@ -32,7 +32,7 @@ class Account_Controller extends Base_Controller {
 		$user_facebook = UserFacebook::where('user_id', '=', Auth::user()->id)->first();
 		// view
 		$template = array(
-			'title'	=> 'Login to Facebook',
+			'title'	=> 'Facebook',
 			'body'	=> 'templates.account',
 			'data' 	=> array(
 				'body'	=> 'account.facebook',

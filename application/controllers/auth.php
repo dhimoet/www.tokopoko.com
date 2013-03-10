@@ -39,7 +39,7 @@ class Auth_Controller extends Base_Controller
 				$fh->store_my_posts();
 				return Redirect::to('/account/profile');
 			}
-			Session::flash('error', '<strong>Error!</strong> Invalid username or password.');
+			Session::flash('error', 'Invalid username or password.');
 		}
 		// display login form
 		$template = array(
@@ -54,6 +54,7 @@ class Auth_Controller extends Base_Controller
 	{
 		// logout user
 		Auth::logout();
+		Session::flash('info', 'You have been successfully logged out.');
 		// redirect to homepage
 		return Redirect::home();
 	}
@@ -89,14 +90,16 @@ class Auth_Controller extends Base_Controller
 		else {
 			// store to users table
 			$user = new User;
-			$user->username			= $register['username'];
+			$user->username			= strtolower($register['username']);
 			$user->display_name 	= $register['displayname'];
 			$user->password			= Hash::make($register['password']);
 			$user->email			= $register['email'];
 			$user->phone		 	= $register['phone'];
-			$user->last_login		= date('Y-m-d H:i:s', strtotime('now'));
 			$user->status			= 'active';
+			$user->description		= $register['description'];
+			$user->last_login		= date('Y-m-d H:i:s', strtotime('now'));
 			$user->save();
+			Session::flash('info', 'Your accout has been successfully created. You can login using the information you entered.');
 			// redirect
 			return Redirect::to('/');
 		}

@@ -144,15 +144,28 @@ class FacebookHelper
 	
 	public function connect_page($page_name)
 	{
-		// get user facebook
-		$user_facebook = UserFacebook::where('user_id', '=', Auth::user()->id)->first();
-		$user_facebook->page_name = $page_name;
-		$user_facebook->save();
+		// check if the page exists
+		if($this->api($page_name)) {
+			// get user facebook
+			$user_facebook = UserFacebook::where('user_id', '=', Auth::user()->id)->first();
+			$user_facebook->page_name = $page_name;
+			$user_facebook->save();
+		}
+		else {
+			Session::flash('error', 'Invalid Facebook page username or id.');
+		}
 	}
 	
 	public function api($param)
 	{
-		$response = $this->facebook->api($param);
+		if($param) {
+			try {
+				$response = $this->facebook->api($param);
+			}
+			catch(FacebookApiException $e) {
+				$response = null;
+			}
+		}
 		return $response;
 	}
 }

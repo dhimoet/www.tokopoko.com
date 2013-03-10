@@ -35,11 +35,19 @@
 				</tr>
 				<tr>
 					<td>Facebook Profile</td>
-					<td><a href="http://www.facebook.com/<?=$user_facebook->uid?>" target="_blank"><?=$user_facebook->uid?></a></td>
+					<td>
+						<?if(isset($user_facebook->uid)) {?>
+						<a href="http://www.facebook.com/<?=$user_facebook->uid?>" target="_blank"><?=$user_facebook->uid?></a>
+						<?}?>
+					</td>
 				</tr>
 				<tr>
 					<td>Facebook Page</td>
-					<td><a href="http://www.facebook.com/<?=$user_facebook->page_name?>" target="_blank"><?=$user_facebook->page_name?></a></td>
+					<td>
+						<?if(isset($user_facebook->uid)) {?>
+						<a href="http://www.facebook.com/<?=$user_facebook->page_name?>" target="_blank"><?=$user_facebook->page_name?></a>
+						<?}?>
+					</td>
 				</tr>
 				<tr>
 					<td>Instagram</td>
