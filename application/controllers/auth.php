@@ -39,18 +39,13 @@ class Auth_Controller extends Base_Controller
 				$fh->store_my_posts();
 				return Redirect::to('/account/profile');
 			}
-			$errors = true;
-		}
-		else {
-			$errors = false;
+			Session::flash('error', '<strong>Error!</strong> Invalid username or password.');
 		}
 		// display login form
 		$template = array(
 			'title'	=> 'Login',
 			'body'	=> 'auth.login',
-			'data' 	=> array(
-				'errors' => $errors
-			)
+			'data' 	=> array()
 		);
 		return View::make('templates.base', $template);
 	}

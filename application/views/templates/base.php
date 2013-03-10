@@ -28,16 +28,24 @@
 			</div>
 		</div>
 	</div>
-	<?if(Session::get('error')) {?>
 	<div class="container">
+		<?if(Session::get('error')) {?>
 		<div class="row">
 			<div class="alert span5">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
 				<?=Session::get('error')?>
 			</div>
 		</div>
+		<?}?>
+		<?if(Session::get('message')) {?>
+		<div class="row">
+			<div class="alert alert-info span5">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<?=Session::get('message')?>
+			</div>
+		</div>
+		<?}?>
 	</div>
-	<?}?>
 	<?=View::make($body, $data)?>
 
 </body>
