@@ -23,7 +23,7 @@
 					<li><a href="/auth/logout">Log Out</a></li>
 					<li><a href="/account/profile">My Account</a></li>
 					<?}?>
-					<li><a href="">Help</a></li>
+					<li><a href="/help/about">Help</a></li>
 				</ul>
 			</div>
 		</div>

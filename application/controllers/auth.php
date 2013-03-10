@@ -31,6 +31,9 @@ class Auth_Controller extends Base_Controller
 			// attempt to login
 			if(Auth::attempt($credentials)) {
 				// success
+				$user = User::where('username', '=', $login['username'])->first();
+				$user->last_login = date('Y-m-d H:i:s', strtotime('now'));
+				$user->save();
 				// store latest posts
 				$fh->login_with_token();
 				$fh->store_my_posts();
@@ -67,19 +70,12 @@ class Auth_Controller extends Base_Controller
 		$register = isset($input['register'])? $input['register'] : null;
 		// define the validation rules
 		$rules = array(
-			'username'	=> 'required|min:4|alpha_dash|unique:users',
-			'password'	=> 'required|min:6|confirmed',
-			'email'		=> 'required|email|unique:users',
-			'phone'		=> 'integer'
+			'displayname'	=> 'required',
+			'username'		=> 'required|min:4|alpha_dash|unique:users',
+			'password'		=> 'required|min:6|confirmed',
+			'email'			=> 'required|email|unique:users',
+			'phone'			=> 'integer'
 		);
-		// check registration type
-		if($register['type'] == 'individual') {
-			$rules['firstname'] = 'required|alpha';
-			$rules['lastname'] = 'required|alpha';
-		}
-		else {
-			$rules['displayname'] = 'required';
-		}
 		// validate the data
 		$validation = Validator::make($register, $rules);
 		// check whether to display the form or not
@@ -99,21 +95,13 @@ class Auth_Controller extends Base_Controller
 			// store to users table
 			$user = new User;
 			$user->username			= $register['username'];
+			$user->display_name 	= $register['displayname'];
 			$user->password			= Hash::make($register['password']);
 			$user->email			= $register['email'];
-			$user->group			= $register['type'];
+			$user->phone		 	= $register['phone'];
 			$user->last_login		= date('Y-m-d H:i:s', strtotime('now'));
 			$user->status			= 'active';
 			$user->save();
-			// store to user_meta table
-			$user_meta = new UserMeta;
-			$user_meta->user_id = $user->id;
-			$user_meta->first_name = $register['firstname'];
-			$user_meta->last_name = $register['lastname'];
-			$user_meta->display_name = $register['displayname'];
-			$user_meta->json_emails = json_encode(array($register['email']));
-			$user_meta->phone = $register['phone'];
-			$user_meta->save();
 			// redirect
 			return Redirect::to('/');
 		}

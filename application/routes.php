@@ -10,8 +10,10 @@ Route::get('/', function()
 {
 	return View::make('home.index');
 });
-
-Route::controller(Controller::detect());
+Route::get('/(:any)', function($username)
+{
+	return View::make('home.user.'. $username);
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +48,15 @@ Event::listen('500', function()
 
 Route::filter('before', function()
 {
-	// Do stuff before every request to your application...
+	$open_routes = array(
+		'', 
+		'home', 
+		'auth', 
+		'help'
+	);
+	if(!in_array(URI::segment(1), $open_routes) && Auth::guest()) {
+		return Redirect::to('/auth/login');
+	}
 });
 
 Route::filter('after', function($response)
@@ -72,5 +82,13 @@ Route::filter('auth', function()
 
 Route::group(array('before' => 'auth'), function() 
 {
-	Route::get('account', function() {});
+	//
 });
+
+/*
+|--------------------------------------------------------------------------
+| Controller Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::controller(Controller::detect());

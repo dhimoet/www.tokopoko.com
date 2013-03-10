@@ -4,7 +4,7 @@
 			<ul class="nav nav-list">
 				<li class="nav-header">Profile</li>
 				<li class="<?=URI::segment(2)=='profile'?'active':''?>"><a href="/account/profile">Edit Profile</a></li>
-				<li class="nav-header">Social Network</li>
+				<li class="nav-header">Social Media</li>
 				<li class="<?=URI::segment(2)=='facebook'?'active':''?>"><a href="/account/facebook">Facebook</a></li>
 			</ul>
 		</div>

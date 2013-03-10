@@ -34,10 +34,11 @@ class FacebookHelper
 			$user_facebook->save();
 			// extend facebook access token
 			$this->facebook->setExtendedAccessToken();
+			$me = $this->facebook->api('/me');
 			// store login status in session
 			Session::put('facebook_login', true);
 			Session::put('facebook_token', $this->facebook->getAccessToken());
-			Session::put('facebook_name', isset($me['name'])? $me['name'] : null);
+			Session::put('facebook_name', isset($me['name'])? $me['name'] : $me['username']);
 			return '/account/facebook';
 		}
 	}
@@ -62,7 +63,7 @@ class FacebookHelper
 				// store login status in session
 				Session::put('facebook_login', true);
 				Session::put('facebook_token', $user_facebook->token);
-				Session::put('facebook_name', $me['name']);
+				Session::put('facebook_name', isset($me['name'])? $me['name'] : $me['username']);
 			}
 		}
 	}
@@ -91,12 +92,12 @@ class FacebookHelper
 		foreach($user_facebook as $uf) {
 			// get latest posts
 			$posts = $this->facebook->api("/{$uf->uid}/posts?access_token={$uf->token}");
-			$this->store_posts($posts, $uf->token);
+			$this->store_posts($uf->user_id, $posts, $uf->token);
 			// check for facebook page
 			if(!empty($uf->page_name)) {
 				// get latest posts
 				$posts = $this->facebook->api("/{$uf->page_name}/posts?access_token={$uf->token}");
-				$this->store_posts($posts, $uf->token);
+				$this->store_posts($uf->user_id, $posts, $uf->token);
 			}
 		}
 	}
@@ -107,11 +108,11 @@ class FacebookHelper
 		if($this->facebook->getUser()) {
 			// get latest posts
 			$posts = $this->facebook->api('/me/posts');
-			$this->store_posts($posts, $this->facebook->getAccessToken());
+			$this->store_posts(Auth::user()->id, $posts, $this->facebook->getAccessToken());
 		}
 	}
 	
-	public function store_posts($posts, $token)
+	public function store_posts($user_id, $posts, $token)
 	{
 		foreach($posts['data'] as $post) {
 			// check post type
@@ -124,6 +125,7 @@ class FacebookHelper
 				if(empty($user_post)) {
 					// create a new object
 					$user_post = new UserPost;
+					$user_post->user_id = $user_id;
 					$user_post->object_id = $image['id'];
 					$user_post->owner_id = $image['from']['id'];
 					$user_post->owner_name = $image['from']['name'];

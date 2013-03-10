@@ -1,11 +1,23 @@
-.image_container {
+.post-image-container {
 	width: 400px;
 	height: 400px;
 	display: block;
 	overflow: hidden;
 }
 
-.image_container img {
+.post-image-container img {
 	height: 400px;
 	max-width: none;
+}
+
+.user-picture {
+	width: 940px;
+	height: 250px;
+	display: block;
+	overflow: hidden;
+	margin: auto;
+}
+
+.user-picture img {
+	width: 940px;
 }
