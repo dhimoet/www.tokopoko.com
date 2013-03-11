@@ -25,7 +25,7 @@ class Auth_Controller extends Base_Controller
 			$login = $input['login'];
 			// collect credentials
 			$credentials = array(
-				'username'	=> $login['username'],
+				'username'	=> strtolower($login['username']),
 				'password'	=> $login['password']
 			);
 			// attempt to login
@@ -99,7 +99,7 @@ class Auth_Controller extends Base_Controller
 			$user->description		= $register['description'];
 			$user->last_login		= date('Y-m-d H:i:s', strtotime('now'));
 			$user->save();
-			Session::flash('info', 'Your accout has been successfully created. You can login using the information you entered.');
+			Session::flash('info', 'Your accout has been successfully created. You can now login using the information entered.');
 			// redirect
 			return Redirect::to('/');
 		}
