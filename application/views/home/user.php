@@ -5,11 +5,13 @@
 			<p><?=$user->description?></p>
 		</div>
 	</div>
+	<?if($user->picture_url) {?>
 	<div class="row">
 		<div class="user-picture img-polaroid">
 			<img src="<?=Config::get('shortcuts.user_picture') . $user->picture_url?>" title="<?=$user->display_name?>" alt="user-picture" />
 		</div>
 	</div>
+	<?}?>
 	<div class="row form-actions">
 		<div class="span6">
 			<table class="table">
@@ -59,8 +61,16 @@
 				</tr>
 			</table>
 		</div>
-		<div class="span6">
-			
+		<div class="span5">
+			<table class="table">
+				<tr>
+					<th colspan="2">Recent Activities</th>
+				</tr>
+				<tr>
+					<td>Last Login</td>
+					<td><?=simple_date($user->last_login)?></td>
+				</tr>
+			</table>
 		</div>
 	</div>
 </div>
