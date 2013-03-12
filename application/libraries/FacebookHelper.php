@@ -90,13 +90,15 @@ class FacebookHelper
 		$user_facebook = UserFacebook::all();
 		// loop
 		foreach($user_facebook as $uf) {
-			// get latest posts
-			$posts = $this->facebook->api("/{$uf->uid}/posts?access_token={$uf->token}");
-			$this->store_posts($uf->user_id, $posts, $uf->token);
 			// check for facebook page
 			if(!empty($uf->page_name)) {
 				// get latest posts
 				$posts = $this->facebook->api("/{$uf->page_name}/posts?access_token={$uf->token}");
+				$this->store_posts($uf->user_id, $posts, $uf->token);
+			}
+			else {
+				// get latest posts
+				$posts = $this->facebook->api("/{$uf->uid}/posts?access_token={$uf->token}");
 				$this->store_posts($uf->user_id, $posts, $uf->token);
 			}
 		}
