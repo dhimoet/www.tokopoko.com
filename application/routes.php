@@ -12,7 +12,7 @@ Route::get('/', function()
 });
 Route::get('/(:any)', function($username)
 {
-	return View::make('home.user.'. $username);
+	return Redirect::to('/home/user/'. $username);
 });
 
 /*

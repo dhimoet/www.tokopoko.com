@@ -24,7 +24,7 @@
 				</tr>
 				<tr>
 					<td>Email</td>
-					<td><?=$user->email?></td>
+					<td><a href="mailto:<?=$user->email?>"><?=$user->email?></a></td>
 				</tr>
 				<tr>
 					<td>Phone</td>

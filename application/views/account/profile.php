@@ -1,6 +1,6 @@
 <h1>Edit Profile</h1>
 <br />
-<p>Edit your profile information.</p>
+<p>Edit your profile information. <a href="/home/user/<?=Auth::user()->username?>">(View)</a></p>
 <form name="profile" id="profile" class="form-horizontal" method="post" action="/account/profile" enctype="multipart/form-data">
 	<div class="control-group">
 		<label class="control-label" for="display_name">Display Name:</label>

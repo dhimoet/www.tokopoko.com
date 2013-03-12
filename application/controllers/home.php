@@ -15,6 +15,9 @@ class Home_Controller extends Base_Controller {
 	public function action_user($username)
 	{
 		$user = User::where('username', '=', $username)->first();
+		if(empty($user)) {
+			return Response::error('404');
+		}
 		$user_facebook = UserFacebook::where('user_id', '=', $user->id)->first();
 		$template = array(
 			'title'	=> $user->display_name,
