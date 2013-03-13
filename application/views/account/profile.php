@@ -12,7 +12,7 @@
 	<div class="control-group">
 		<label class="control-label" for="password">Password:</label>
 		<div class="controls">
-			<label class="control-label text-left"><a href="/account/password">Change Password</a></label>
+			<label class="control-label" style="text-align: left;"><a href="/account/password">Change Password</a></label>
 		</div>
 	</div>
 	<div class="control-group">
@@ -43,7 +43,7 @@
 	</div>
 	<div class="control-group">
 		<div class="controls">
-			<input type="submit" class="btn btn-primary" value="Save" />
+			<input type="submit" class="btn btn-primary span2" value="Save" />
 		</div>
 	</div>
 </form>

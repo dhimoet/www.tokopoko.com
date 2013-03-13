@@ -4,19 +4,23 @@
 		<br />
 	</div>
 	<div class="row">
-		<form name="login" id="login" method="post" action="/auth/login">
-			<div class="row">
-				<label for="username" class="span2">Username: </label>
-				<input type="text" name="login[username]" id="username" class="span4" value="" />
+		<form name="login" id="login" class="form-horizontal" method="post" action="/auth/login">
+			<div class="control-group">
+				<label for="username" class="control-label">Username: </label>
+				<div class="controls">
+					<input type="text" name="username" id="username" class="span4" value="" />
+				</div>
 			</div>
-			<div class="row">
-				<label for="password" class="span2">Password: </label>
-				<input type="password" name="login[password]" id="password" class="span4" value="" />
+			<div class="control-group">
+				<label for="password" class="control-label">Password: </label>
+				<div class="controls">
+					<input type="password" name="password" id="password" class="span4" value="" />
+				</div>
 			</div>
-			<div class="row">
-				<span class="offset2">
+			<div class="control-group">
+				<div class="controls">
 					<input type="submit" class="btn btn-primary btn-large span2" value="Login" />
-				</span>
+				</div>
 			</div>
 		</form>
 	</div>

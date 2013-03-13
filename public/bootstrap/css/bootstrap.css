@@ -721,7 +721,7 @@ a.text-success:focus {
 }
 
 .text-left {
-  text-align: left !important;
+  text-align: left;
 }
 
 .text-right {

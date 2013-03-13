@@ -21,17 +21,16 @@ class Auth_Controller extends Base_Controller
 		// get input data
 		$input = Input::all();
 		// check whether to display the form or not
-		if(isset($input['login'])) {
-			$login = $input['login'];
+		if(!empty($input)) {
 			// collect credentials
 			$credentials = array(
-				'username'	=> strtolower($login['username']),
-				'password'	=> $login['password']
+				'username'	=> strtolower($input['username']),
+				'password'	=> $input['password']
 			);
 			// attempt to login
 			if(Auth::attempt($credentials)) {
 				// success
-				$user = User::where('username', '=', $login['username'])->first();
+				$user = User::where('username', '=', $input['username'])->first();
 				$user->last_login = date('Y-m-d H:i:s', strtotime('now'));
 				$user->save();
 				// store latest posts

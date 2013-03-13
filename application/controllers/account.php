@@ -13,7 +13,6 @@ class Account_Controller extends Base_Controller {
 		return Redirect::to('/account/profile');
 	}
 	
-	// @TODO align change password link
 	// @TODO fix file upload
 	public function action_profile()
 	{
