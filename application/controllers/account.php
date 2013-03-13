@@ -13,7 +13,6 @@ class Account_Controller extends Base_Controller {
 		return Redirect::to('/account/profile');
 	}
 	
-	// @TODO fix file upload
 	public function action_profile()
 	{
 		$user = User::find(Auth::user()->id);
