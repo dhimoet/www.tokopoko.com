@@ -40,6 +40,9 @@
 		<div class="controls">
 			<?=$user->picture_url?>&nbsp;<input type="file" name="picture" id="picture"/>
 		</div>
+		<div class="controls">
+			<span class="text-error"><?=$inputs && isset($errors['picture'][0])? $errors['picture'][0] : ''?></span>
+		</div>
 	</div>
 	<div class="control-group">
 		<div class="controls">

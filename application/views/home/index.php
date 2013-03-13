@@ -30,10 +30,10 @@
 		$.ajax({
 			url: '/home/ajax_get_posts',
 			cache: true,
+			async: true,
 			dataType: 'json',
 			success: function(response) {
 				render_posts(response);
-				reposition_images();
 			}
 		});
 	});
@@ -42,7 +42,6 @@
 	{
 		var template = $('#post_template').html();
 		$.each(posts, function(key, value) {
-			console.log(value);
 			$('#posts_container').append(_.template(template, {
 				post: value.attributes,
 				user: value.relationships.user.attributes
@@ -50,6 +49,7 @@
 		});
 		$('#progress_bar_container').hide();
 		$('#posts_container').fadeIn();
+		reposition_images();
 	}
 	
 	function reposition_images()

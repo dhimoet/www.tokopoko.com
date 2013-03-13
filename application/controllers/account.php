@@ -58,6 +58,9 @@ class Account_Controller extends Base_Controller {
 				$filename = $user->username .'_'. timestamp() .'.'. File::extension($inputs['picture']['name']);
 				$upload = Input::upload('picture', $_SERVER['DOCUMENT_ROOT'] . Config::get('shortcuts.user_picture'), $filename);
 			}
+			else {
+				Session::flash('error', 'Your picture was not saved. Please check the type and the file size.');
+			}
 			// update a row
 			$user->display_name	= $inputs['display_name'];
 			$user->email 		= $inputs['email'];
