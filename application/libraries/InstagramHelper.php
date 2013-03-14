@@ -85,10 +85,14 @@ class InstagramHelper
 			// loop
 			$this->store_posts($ui->user_id, $response);
 		}
+		return true;
 	} 
 
 	public function store_posts($user_id, $response)
 	{
+		if(empty($response)) {
+			return false;
+		}
 		foreach($response->data as $post) {
 			// check if exists
 			$up = UserPost::where('object_id', '=', $post->id)->first();
@@ -108,6 +112,7 @@ class InstagramHelper
 				$up->save();
 			}
 		}
+		return true;
 	}
 	
 	public function check()
