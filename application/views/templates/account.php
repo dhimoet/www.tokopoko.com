@@ -7,6 +7,7 @@
 				<li class="<?=URI::segment(2)=='password'?'active':''?>"><a href="/account/password">Change Password</a></li>
 				<li class="nav-header">Social Media Accounts</li>
 				<li class="<?=URI::segment(2)=='facebook'?'active':''?>"><a href="/account/facebook">Facebook</a></li>
+				<li class="<?=URI::segment(2)=='instagram'?'active':''?>"><a href="/account/instagram">Instagram</a></li>
 			</ul>
 		</div>
 		<div class="span9">

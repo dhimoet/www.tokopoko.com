@@ -7,7 +7,9 @@ class Home_Controller extends Base_Controller {
 		$template = array(
 			'title'	=> 'Home',
 			'body'	=> 'home.index',
-			'data' 	=> array()
+			'data' 	=> array(
+				'nocache' => Input::get('nocache')
+			)
 		);
 		return View::make('templates.base', $template);
 	}
@@ -32,11 +34,14 @@ class Home_Controller extends Base_Controller {
 	
 	public function action_ajax_get_posts()
 	{
+		$force_refresh = Input::get('nocache');
 		// check if cached
-		if(!Cache::get('user_posts')) {
+		if(!Cache::get('user_posts') || $force_refresh) {
 			// get all posts from facebook users
 			$fh = new FacebookHelper;
 			$fh->fetch_posts();
+			$ih = new InstagramHelper;
+			$ih->fetch_posts();
 			$user_posts = UserPost::with('user')->order_by('object_updated_time', 'desc')->take(10)->get();
 			Cache::put('user_posts', json_encode($user_posts), Config::get('shortcuts.cache_duration'));
 			echo json_encode($user_posts);

@@ -136,4 +136,22 @@ class Account_Controller extends Base_Controller {
 		);
 		return View::make('templates.base', $template);
 	}
+
+	public function action_instagram()
+	{
+		// check token validity
+		$ih = new InstagramHelper;
+		// view
+		$template = array(
+			'title'	=> 'Instagram',
+			'body'	=> 'templates.account',
+			'data' 	=> array(
+				'body'	=> 'account.instagram',
+				'data'	=> array(
+					'status' => $ih->check()
+				)
+			)
+		);
+		return View::make('templates.base', $template);
+	}
 }

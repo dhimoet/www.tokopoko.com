@@ -122,21 +122,21 @@ class FacebookHelper
 				// get image source
 				$this->facebook->setAccessToken($token);
 				$image = $this->facebook->api("/{$post['object_id']}");
-				$user_post = UserPost::where('object_id', '=', $image['id'])->first();
+				$up = UserPost::where('object_id', '=', $image['id'])->first();
 				// check if exists
-				if(empty($user_post)) {
+				if(empty($up)) {
 					// create a new object
-					$user_post = new UserPost;
-					$user_post->user_id = $user_id;
-					$user_post->object_id = $image['id'];
-					$user_post->owner_id = $image['from']['id'];
-					$user_post->owner_name = $image['from']['name'];
-					$user_post->image_name = isset($image['name'])? $image['name'] : null;
-					$user_post->image_url = $image['source'];
-					$user_post->page_url = $image['link'];
-					$user_post->location = isset($image['place']['name'])? $image['place']['name']: null;
-					$user_post->object_updated_time = date('Y-m-d H:i:s', strtotime($post['updated_time']));
-					$user_post->save();
+					$up = new UserPost;
+					$up->user_id = $user_id;
+					$up->object_id = $image['id'];
+					$up->owner_id = $image['from']['id'];
+					$up->owner_name = $image['from']['name'];
+					$up->image_name = isset($image['name'])? $image['name'] : null;
+					$up->image_url = $image['source'];
+					$up->page_url = $image['link'];
+					$up->location = isset($image['place']['name'])? $image['place']['name']: null;
+					$up->object_updated_time = date('Y-m-d H:i:s', strtotime($post['updated_time']));
+					$up->save();
 				}
 			}
 		}

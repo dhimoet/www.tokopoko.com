@@ -5,5 +5,10 @@ return array(
 	'facebook' => array(
 		'appId' 	=> '',
 		'secret' 	=> ''
+	),
+	// instagram app info
+	'instagram' => array(
+		'client_id'		=> '',
+		'client_secret'	=> ''
 	)
 );

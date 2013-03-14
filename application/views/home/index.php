@@ -28,7 +28,7 @@
 	$(document).ready(function() {
 		// get posts
 		$.ajax({
-			url: '/home/ajax_get_posts',
+			url: "/home/ajax_get_posts<?=isset($nocache)? '/?nocache=1' : '' ?>",
 			cache: true,
 			async: true,
 			dataType: 'json',
