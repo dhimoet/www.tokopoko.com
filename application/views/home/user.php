@@ -87,5 +87,6 @@
 		// reposition to center
 		to_top = -1*(height - 250)/2;
 		$el.css({position: 'relative', top: to_top});
+		$el.fadeIn();
 	}
 </script>

@@ -19,5 +19,6 @@
 }
 
 .user-picture img {
+	display: none;
 	width: 940px;
 }
