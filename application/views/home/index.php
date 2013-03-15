@@ -5,11 +5,11 @@
   			<div class="bar" style="width: 100%;"></div>
 		</div>
 	</div>
-	<div id="posts_container" class="hide"></div>
+	<div id="posts_container"></div>
 </div>
 
 <script type="text/html" id="post_template">
-	<div class="row">
+	<div class="row hide">
 		<div class="span6">
 			<a href="<%= post.page_url %>" class="container post-image-container img-polaroid" target="_blank">
 				<img src="<%= post.image_url %>" />
@@ -33,6 +33,7 @@
 			async: true,
 			dataType: 'json',
 			success: function(response) {
+				$('#progress_bar_container').hide();
 				render_posts(response);
 			}
 		});
@@ -41,29 +42,31 @@
 	function render_posts(posts)
 	{
 		var template = $('#post_template').html();
+		// put in the template
 		$.each(posts, function(key, value) {
 			$('#posts_container').append(_.template(template, {
 				post: value.attributes,
 				user: value.relationships.user.attributes
 			}));
+			// display and resize
+			$('#posts_container').find('.row').last().fadeIn(function() {
+				reposition_images($(this).find('img'));
+			});
 		});
-		$('#progress_bar_container').hide();
-		$('#posts_container').fadeIn();
-		reposition_images();
 	}
 	
-	function reposition_images()
+	function reposition_images($img)
 	{
-		$.each($('.post-image-container img'), function(key, value) {
+		// check image size
+		if($img.width() > 400) {
 			// reposition to center
-			if(value.width > 400) {
-				$(value).css({position: 'relative', left: -65});
-			}
+			to_left = -1*($img.width() - 400)/2;
+			$img.css({position: 'relative', left: to_left});
+		}
+		else if($img[0].naturalHeight > 400) {
 			// expand tall image
-			else if(value.naturalHeight > 400) {
-				$(value).width(400);
-				$(value).height('auto');
-			}
-		});
+			$img.width(400);
+			$img.height('auto');
+		}
 	}
 </script>
