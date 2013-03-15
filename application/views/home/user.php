@@ -74,3 +74,18 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	$(window).load(function() {
+		resize_picture();
+	});
+	
+	function resize_picture()
+	{
+		var $el = $('.user-picture').find('img');
+		var height = $el.height();
+		// reposition to center
+		to_top = -1*(height - 250)/2;
+		$el.css({position: 'relative', top: to_top});
+	}
+</script>
