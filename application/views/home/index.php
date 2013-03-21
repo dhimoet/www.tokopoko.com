@@ -25,19 +25,48 @@
 </script>
 
 <script>
+	var page = 1;
+	var page_max = 1;
+	var ajax_lock = false;
+	
+	$(window).scroll(function() {
+		if($(document).height() - $(document).scrollTop() <= $(window).height()) {
+			// scrolled to the bottom of the page
+			if(page <= page_max && page <= 20 && !ajax_lock) {
+				fetch_posts();
+			}
+		}
+	});
+
 	$(document).ready(function() {
 		// get posts
+		fetch_posts();
+	});
+	
+	function fetch_posts()
+	{
 		$.ajax({
-			url: "/home/ajax_get_posts<?=isset($nocache)? '/?nocache=1' : '' ?>",
+			url: "/home/ajax_get_posts",
+			type: "GET",
+			data: {
+				<?=isset($nocache)? 'nocache: 1,' : '' ?>
+				page: page
+			},
 			cache: true,
 			async: true,
 			dataType: 'json',
+			beforeSend: function() {
+				ajax_lock = true;
+			},
 			success: function(response) {
+				page_max = response.last;
 				$('#progress_bar_container').hide();
-				render_posts(response);
+				render_posts(response.results);
+				page++;
+				ajax_lock = false;
 			}
 		});
-	});
+	}
 	
 	function render_posts(posts)
 	{

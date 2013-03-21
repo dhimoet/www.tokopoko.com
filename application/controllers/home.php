@@ -42,12 +42,13 @@ class Home_Controller extends Base_Controller {
 			$fh->fetch_posts();
 			$ih = new InstagramHelper;
 			$ih->fetch_posts();
-			$user_posts = UserPost::with('user')->order_by('object_updated_time', 'desc')->take(10)->get();
+			$user_posts = UserPost::with('user')->order_by('object_updated_time', 'desc')->paginate(10);
 			Cache::put('user_posts', json_encode($user_posts), Config::get('shortcuts.cache_duration'));
 			echo json_encode($user_posts);
 		}
 		else {
-			echo Cache::get('user_posts');
+			$user_posts = UserPost::with('user')->order_by('object_updated_time', 'desc')->paginate(10);
+			echo json_encode($user_posts);
 		}
 		die;
 	}
