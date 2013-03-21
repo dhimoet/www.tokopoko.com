@@ -57,6 +57,13 @@ Route::filter('before', function()
 	if(!in_array(URI::segment(1), $open_routes) && Auth::guest()) {
 		return Redirect::to('/auth/login');
 	}
+	// log activities
+	$activity = new SiteActivity;
+	$activity->ip_address = Request::ip();
+	$activity->user_id = (!Auth::guest())? Auth::user()->id : null;
+	$activity->page_to = Request::uri();
+	$activity->page_from = Request::referrer();
+	$activity->save();
 });
 
 Route::filter('after', function($response)
