@@ -1,11 +1,11 @@
 <div class="container">
+	<div id="posts_container"></div>
 	<div id="progress_bar_container">
 		<h3>Loading...</h3>
 		<div class="progress progress-striped active">
   			<div class="bar" style="width: 100%;"></div>
 		</div>
 	</div>
-	<div id="posts_container"></div>
 </div>
 
 <script type="text/html" id="post_template">
@@ -56,6 +56,7 @@
 			async: true,
 			dataType: 'json',
 			beforeSend: function() {
+				$('#progress_bar_container').show();
 				ajax_lock = true;
 			},
 			success: function(response) {
