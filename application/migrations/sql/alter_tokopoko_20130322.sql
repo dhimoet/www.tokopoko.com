@@ -1,0 +1,1 @@
+alter table site_activities add column user_agent varchar(255) after ip_address;

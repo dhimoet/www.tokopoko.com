@@ -60,6 +60,7 @@ Route::filter('before', function()
 	// log activities
 	$activity = new SiteActivity;
 	$activity->ip_address = Request::ip();
+	$activity->user_agent = $_SERVER['HTTP_USER_AGENT'];
 	$activity->user_id = (!Auth::guest())? Auth::user()->id : null;
 	$activity->page_to = Request::uri();
 	$activity->page_from = Request::referrer();
