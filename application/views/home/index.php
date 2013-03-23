@@ -30,7 +30,7 @@
 	var ajax_lock = false;
 	
 	$(window).scroll(function() {
-		if($(document).height() - $(document).scrollTop() <= $(window).height()) {
+		if($(document).height() - $(document).scrollTop() <= $(window).height() - 100) {
 			// scrolled to the bottom of the page
 			if(page <= page_max && page <= 20 && !ajax_lock) {
 				fetch_posts();
