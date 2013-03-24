@@ -92,13 +92,19 @@ class FacebookHelper
 		foreach($user_facebook as $uf) {
 			// check for facebook page
 			if(!empty($uf->page_name)) {
-				// get latest posts
-				$posts = $this->facebook->api("/{$uf->page_name}/posts?access_token={$uf->token}");
-				$this->store_posts($uf->user_id, $posts, $uf->token);
+				$api = "/{$uf->page_name}/posts?access_token={$uf->token}";
 			}
 			else {
-				// get latest posts
-				$posts = $this->facebook->api("/{$uf->uid}/posts?access_token={$uf->token}");
+				$api = "/{$uf->uid}/posts?access_token={$uf->token}";
+			}
+			try {
+				$posts = $this->facebook->api($api);
+			}
+			catch(FacebookApiException $e) {
+				$posts = null;
+			}
+			// get latest posts
+			if($posts) {
 				$this->store_posts($uf->user_id, $posts, $uf->token);
 			}
 		}
